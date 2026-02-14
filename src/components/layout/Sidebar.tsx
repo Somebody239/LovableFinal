@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { ChevronRight, ChevronDown, FileCode, FileJson, File, Plus, Upload, Search, Image as ImageIcon, Table, Users, Key, Shield, Globe, Settings, Link, Server, CheckCircle, AlertCircle, GitBranch, Bug, Package, Play, Zap } from 'lucide-react';
+import { ChevronRight, ChevronDown, FileCode, FileJson, File, Plus, Upload, Search, Image as ImageIcon } from 'lucide-react';
 import type { FileData } from './Layout';
 
 interface SidebarProps {
@@ -70,7 +70,7 @@ const FileTreeItem = ({ name, type, level, isExpanded, onToggle, children, onCli
 };
 
 const Sidebar: React.FC<SidebarProps> = ({
-    activeItem, files, onFileSelect, activeFile, onCreateFile, onUploadFile, selectedTab = 'files', onTabChange
+    activeItem, files: _files, onFileSelect, activeFile, onCreateFile, onUploadFile, selectedTab = 'files', onTabChange
 }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [isCreating, setIsCreating] = useState(false);

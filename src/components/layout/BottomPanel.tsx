@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, ChevronUp, ChevronDown, MoreHorizontal, Circle } from 'lucide-react';
+import { X, ChevronUp, ChevronDown, Circle } from 'lucide-react';
 
 interface BottomPanelProps {
     onClose: () => void;

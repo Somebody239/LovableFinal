@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Globe, Users, Zap, CheckCircle, Smartphone, ExternalLink, Calendar, MapPin } from 'lucide-react';
+import { useState } from 'react';
+import { Globe, Zap, CheckCircle, Smartphone, ExternalLink, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function HostingView() {

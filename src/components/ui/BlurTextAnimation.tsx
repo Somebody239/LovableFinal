@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState, useMemo } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 
 interface WordData {
     text: string;
@@ -30,8 +30,8 @@ export default function BlurTextAnimation({
     animationDelay = 4000
 }: BlurTextAnimationProps) {
     const [isAnimating, setIsAnimating] = useState(false);
-    const animationTimeoutRef = useRef<NodeJS.Timeout>();
-    const resetTimeoutRef = useRef<NodeJS.Timeout>();
+    const animationTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const resetTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     const textWords = useMemo(() => {
         if (words) return words;

@@ -53,8 +53,6 @@ const EditorArea: React.FC<EditorAreaProps> = ({
         );
     }
 
-    const lines = activeFile.content.split('\n');
-
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         onFileChange(activeFile.path, e.target.value);
     };

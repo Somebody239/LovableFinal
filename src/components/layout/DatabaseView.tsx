@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { Database, Server, Activity, Users, BarChart3, PieChart } from 'lucide-react';
+import { Database, Server, Activity, Users } from 'lucide-react';
 
 export default function DatabaseView() {
     return (

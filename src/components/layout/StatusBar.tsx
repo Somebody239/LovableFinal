@@ -1,5 +1,5 @@
 import React from 'react';
-import { GitBranch, AlertCircle, AlertTriangle, Bell } from 'lucide-react';
+import { GitBranch, AlertCircle, AlertTriangle } from 'lucide-react';
 import type { FileData } from './Layout';
 
 interface StatusBarProps {
@@ -8,7 +8,7 @@ interface StatusBarProps {
     activeFile: FileData | null;
 }
 
-const StatusBar: React.FC<StatusBarProps> = ({ onToggleTerminal, isTerminalOpen, activeFile }) => {
+const StatusBar: React.FC<StatusBarProps> = ({ onToggleTerminal: _onToggleTerminal, isTerminalOpen: _isTerminalOpen, activeFile }) => {
     const getLanguageLabel = (lang: string) => {
         switch (lang) {
             case 'tsx': return 'TypeScript JSX';

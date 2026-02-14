@@ -6,7 +6,7 @@ interface TopNavProps {
     onToggleSidebar: () => void;
 }
 
-const TopNav: React.FC<TopNavProps> = ({ isSidebarVisible, onToggleSidebar }) => {
+const TopNav: React.FC<TopNavProps> = ({ isSidebarVisible: _isSidebarVisible, onToggleSidebar }) => {
     return (
         <nav style={{
             position: 'relative',

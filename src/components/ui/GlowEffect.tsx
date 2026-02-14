@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, type Transition } from 'framer-motion';
+import { motion, type Transition, type TargetAndTransition } from 'framer-motion';
 
 export type GlowEffectProps = {
     className?: string;
@@ -145,7 +145,7 @@ export function GlowEffect({
                 willChange: 'transform',
                 backfaceVisibility: 'hidden',
             }}
-            animate={animations[mode]}
+            animate={animations[mode] as TargetAndTransition}
             className={className}
         />
     );
