@@ -8,6 +8,7 @@ import StatusBar from './StatusBar';
 import AgentPanel from './AgentPanel';
 import DatabaseView from './DatabaseView';
 import HostingView from './HostingView';
+import GradientBackground from '../ui/GradientBackground';
 
 export interface FileData {
     name: string;
@@ -85,95 +86,112 @@ const Layout: React.FC = () => {
             width: '100vw',
             overflow: 'hidden',
             color: 'hsl(var(--foreground))',
-            background: '#09090b',
-            position: 'relative'
+            position: 'relative',
+            background: '#09090b', // Fallback
         }}>
+            {/* Gradient Background Layer - Canvas Mode for best performance/look */}
+            <GradientBackground mode="canvas" style={{ position: 'absolute', inset: 0, zIndex: 0 }} />
 
-            <TitleBar activeFile={activeFile} />
-
+            {/* Overlay to darken the gradient for "minimal" look */}
             <div style={{
-                display: 'flex',
-                flex: 1,
-                minHeight: 0,
-                padding: '8px 12px 12px 12px',
-                gap: '12px'
-            }}>
-                {/* Left Side: Activity + Sidebar */}
-                <div style={{ display: 'flex', gap: '8px' }}>
-                    <div style={{
-                        borderRadius: '12px',
-                        overflow: 'hidden',
-                        background: '#000000', // Darker black
-                        border: '1px solid #27272a',
-                        height: '100%'
-                    }}>
-                        <ActivityBar activeItem={activeItem} onSelectItem={setActiveItem} />
-                    </div>
+                position: 'absolute',
+                inset: 0,
+                background: 'rgba(9, 9, 11, 0.85)', // High opacity dark overlay
+                zIndex: 0,
+                backdropFilter: 'blur(10px)', // Blur the gradient slightly
+            }} />
 
-                    <div style={{
-                        borderRadius: '12px',
-                        overflow: 'hidden',
-                        background: '#0a0a0a', // Slightly lighter than pure black
-                        border: '1px solid #27272a',
-                        height: '100%',
-                        display: activeItem ? 'flex' : 'none'
-                    }}>
-                        <Sidebar
-                            activeItem={activeItem}
-                            files={files}
-                            onFileSelect={handleFileSelect}
-                            activeFile={activeFile}
-                            onCreateFile={handleCreateFile}
-                            onUploadFile={handleUploadFile}
-                            selectedTab={currentView}
-                            onTabChange={setCurrentView}
-                        />
-                    </div>
-                </div>
+            {/* Main Content Content (z-index 1 to sit above background) */}
+            <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', height: '100%' }}>
+                <TitleBar activeFile={activeFile} />
 
-                {/* Center: Main View Area */}
                 <div style={{
                     display: 'flex',
-                    flexDirection: 'column',
                     flex: 1,
-                    minWidth: 0,
-                    borderRadius: '12px',
-                    overflow: 'hidden',
-                    background: '#0a0a0a',
-                    border: '1px solid #27272a',
-                    position: 'relative'
+                    minHeight: 0,
+                    padding: '8px 12px 12px 12px',
+                    gap: '12px'
                 }}>
-                    {currentView === 'files' && (
-                        <>
-                            <EditorArea
-                                openFiles={openFiles}
-                                activeFile={activeFile}
+                    {/* Left Side: Activity + Sidebar */}
+                    <div style={{ display: 'flex', gap: '8px' }}>
+                        <div style={{
+                            borderRadius: '12px',
+                            overflow: 'hidden',
+                            background: 'rgba(24, 24, 27, 0.6)', // Semi-transparent
+                            border: '1px solid rgba(255, 255, 255, 0.08)',
+                            height: '100%',
+                            backdropFilter: 'blur(20px)'
+                        }}>
+                            <ActivityBar activeItem={activeItem} onSelectItem={setActiveItem} />
+                        </div>
+
+                        <div style={{
+                            borderRadius: '12px',
+                            overflow: 'hidden',
+                            background: 'rgba(10, 10, 10, 0.6)', // Semi-transparent
+                            border: '1px solid rgba(255, 255, 255, 0.08)',
+                            height: '100%',
+                            display: activeItem ? 'flex' : 'none',
+                            backdropFilter: 'blur(20px)'
+                        }}>
+                            <Sidebar
+                                activeItem={activeItem}
+                                files={files}
                                 onFileSelect={handleFileSelect}
-                                onFileClose={handleFileClose}
-                                onFileChange={handleFileChange}
+                                activeFile={activeFile}
+                                onCreateFile={handleCreateFile}
+                                onUploadFile={handleUploadFile}
+                                selectedTab={currentView}
+                                onTabChange={setCurrentView}
                             />
-                            {isTerminalOpen && (
-                                <BottomPanel onClose={() => setIsTerminalOpen(false)} />
-                            )}
-                        </>
-                    )}
-                    {currentView === 'database' && <DatabaseView />}
-                    {currentView === 'hosting' && <HostingView />}
+                        </div>
+                    </div>
+
+                    {/* Center: Main View Area */}
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        flex: 1,
+                        minWidth: 0,
+                        borderRadius: '12px',
+                        overflow: 'hidden',
+                        background: 'rgba(10, 10, 10, 0.6)', // Semi-transparent
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                        position: 'relative',
+                        backdropFilter: 'blur(20px)'
+                    }}>
+                        {currentView === 'files' && (
+                            <>
+                                <EditorArea
+                                    openFiles={openFiles}
+                                    activeFile={activeFile}
+                                    onFileSelect={handleFileSelect}
+                                    onFileClose={handleFileClose}
+                                    onFileChange={handleFileChange}
+                                />
+                                {isTerminalOpen && (
+                                    <BottomPanel onClose={() => setIsTerminalOpen(false)} />
+                                )}
+                            </>
+                        )}
+                        {currentView === 'database' && <DatabaseView />}
+                        {currentView === 'hosting' && <HostingView />}
+                    </div>
+
+                    {/* Right: Agent Panel */}
+                    <div style={{
+                        height: '100%'
+                    }}>
+                        <AgentPanel />
+                    </div>
                 </div>
 
-                {/* Right: Agent Panel */}
-                <div style={{
-                    height: '100%'
-                }}>
-                    <AgentPanel />
-                </div>
+                <StatusBar
+                    onToggleTerminal={() => setIsTerminalOpen(!isTerminalOpen)}
+                    isTerminalOpen={isTerminalOpen}
+                    activeFile={activeFile}
+                />
             </div>
-
-            <StatusBar
-                onToggleTerminal={() => setIsTerminalOpen(!isTerminalOpen)}
-                isTerminalOpen={isTerminalOpen}
-                activeFile={activeFile}
-            />
         </div>
     );
 };

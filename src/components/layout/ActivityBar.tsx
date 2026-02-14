@@ -22,9 +22,8 @@ const ActivityBar: React.FC<ActivityBarProps> = ({ activeItem, onSelectItem }) =
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            background: 'hsl(var(--secondary) / 0.3)', // Semi-transparent
-            backdropFilter: 'blur(10px)',
-            borderRight: '1px solid hsl(var(--border))',
+            background: 'transparent',
+            height: '100%',
             zIndex: 10
         }}>
             {/* Top Icons */}
@@ -76,8 +75,8 @@ const ActivityButton: React.FC<ActivityButtonProps> = ({ icon, tooltip, active, 
             height: '36px',
             borderRadius: '8px',
             border: 'none',
-            background: active ? 'hsl(var(--accent) / 0.5)' : 'transparent', // Highlight active
-            color: active ? 'hsl(var(--foreground))' : 'hsl(var(--muted-foreground))',
+            background: active ? 'rgba(255, 255, 255, 0.1)' : 'transparent', // Highlight active
+            color: active ? '#e5e5e5' : '#71717a',
             cursor: 'pointer',
             position: 'relative',
             transition: 'all 150ms ease-in-out'
@@ -93,7 +92,7 @@ const ActivityButton: React.FC<ActivityButtonProps> = ({ icon, tooltip, active, 
                 width: '3px',
                 height: '16px',
                 borderRadius: '0 4px 4px 0',
-                background: 'hsl(var(--primary))',
+                background: '#e5e5e5',
                 opacity: 0 // Hidden for now, using background highlight instead
             }} />
         )}

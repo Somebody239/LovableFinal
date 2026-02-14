@@ -137,20 +137,21 @@ const AgentPanel: React.FC = () => {
     return (
         <div style={{
             width: showPlan ? '550px' : '320px',
-            background: '#0a0a0a',
-            border: '1px solid #27272a',
+            background: 'rgba(10, 10, 10, 0.6)', // Semi-transparent
+            border: '1px solid rgba(255, 255, 255, 0.08)',
             borderRadius: '12px',
             display: 'flex',
             flexDirection: 'column',
             position: 'relative',
             transition: 'width 0.3s ease',
             height: '100%',
-            overflow: 'hidden'
+            overflow: 'hidden',
+            backdropFilter: 'blur(20px)'
         }}>
             {/* Header */}
             <div style={{
                 padding: '12px 16px',
-                borderBottom: '1px solid #27272a',
+                borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
@@ -167,8 +168,8 @@ const AgentPanel: React.FC = () => {
                             alignItems: 'center',
                             gap: '6px',
                             padding: '4px 10px',
-                            background: '#18181b',
-                            border: '1px solid #27272a',
+                            background: 'rgba(255, 255, 255, 0.05)',
+                            border: '1px solid rgba(255, 255, 255, 0.08)',
                             borderRadius: '8px',
                             color: '#a1a1aa',
                             fontSize: '12px',
@@ -196,7 +197,7 @@ const AgentPanel: React.FC = () => {
                                     top: 'calc(100% + 4px)',
                                     right: 0,
                                     width: '220px',
-                                    background: '#18181b',
+                                    background: '#18181b', // Keep solid for dropdown
                                     border: '1px solid #27272a',
                                     borderRadius: '10px',
                                     boxShadow: '0 8px 30px rgba(0,0,0,0.5)',
@@ -270,7 +271,7 @@ const AgentPanel: React.FC = () => {
                                         width: '56px',
                                         height: '56px',
                                         borderRadius: '16px',
-                                        background: '#27272a',
+                                        background: 'rgba(255, 255, 255, 0.05)',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
@@ -297,19 +298,19 @@ const AgentPanel: React.FC = () => {
                                             style={{
                                                 padding: '6px 12px',
                                                 borderRadius: '8px',
-                                                border: '1px solid #27272a',
-                                                background: '#18181b',
+                                                border: '1px solid rgba(255, 255, 255, 0.08)',
+                                                background: 'rgba(255, 255, 255, 0.03)',
                                                 fontSize: '11px',
                                                 cursor: 'pointer',
                                                 color: '#a1a1aa',
                                                 transition: 'all 0.15s'
                                             }}
                                             onMouseEnter={(e) => {
-                                                e.currentTarget.style.background = '#27272a';
+                                                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
                                                 e.currentTarget.style.color = '#e5e5e5';
                                             }}
                                             onMouseLeave={(e) => {
-                                                e.currentTarget.style.background = '#18181b';
+                                                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
                                                 e.currentTarget.style.color = '#a1a1aa';
                                             }}
                                         >
@@ -439,7 +440,7 @@ const AgentPanel: React.FC = () => {
                 left: 0,
                 right: 0,
                 padding: '12px',
-                background: 'linear-gradient(to top, #0a0a0a 60%, transparent 100%)',
+                background: 'linear-gradient(to top, rgba(10, 10, 10, 0.95) 70%, transparent 100%)',
                 zIndex: 50
             }}>
                 {/* @ Mention Dropdown */}
@@ -525,8 +526,8 @@ const AgentPanel: React.FC = () => {
 
                 {/* Input Area */}
                 <div style={{
-                    background: '#18181b',
-                    border: '1px solid #27272a',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid rgba(255, 255, 255, 0.08)',
                     borderRadius: '16px',
                     padding: '10px 14px',
                     display: 'flex',
@@ -608,7 +609,7 @@ const AgentPanel: React.FC = () => {
                                 onClick={handleSend}
                                 style={{
                                     width: '28px', height: '28px', borderRadius: '50%',
-                                    background: chatInput.trim() ? '#3b82f6' : '#27272a',
+                                    background: chatInput.trim() ? '#3b82f6' : 'rgba(255, 255, 255, 0.05)',
                                     border: 'none',
                                     color: 'white',
                                     display: 'flex', alignItems: 'center', justifyContent: 'center',

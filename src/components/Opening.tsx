@@ -61,8 +61,8 @@ const Opening: React.FC<OpeningProps> = ({ onComplete }) => {
         ctx.fillRect(0, 0, w, h);
 
         // Heart curve parameters
-        const minCurveY = h * 0.60 + breathOffset;  // Lowest point (center dip)
-        const edgeCurveY = h * 0.38 + breathOffset;  // Height at edges
+        const minCurveY = h * 0.75 + breathOffset;  // Lowest point (center dip) - Lowered from 0.60
+        const edgeCurveY = h * 0.50 + breathOffset;  // Height at edges - Lowered from 0.38
 
         const imageData = ctx.createImageData(w, h);
         const data = imageData.data;
@@ -147,6 +147,7 @@ const Opening: React.FC<OpeningProps> = ({ onComplete }) => {
                 animate={{
                     opacity: isExiting ? 0 : 1,
                     scale: isExiting ? 1.4 : 1,
+                    y: isExiting ? "100%" : "0%", // Slide down on exit
                 }}
                 transition={{
                     duration: 2.5,
@@ -195,7 +196,7 @@ const Opening: React.FC<OpeningProps> = ({ onComplete }) => {
                             className={`
                                 relative w-12 h-6 rounded-md transition-colors duration-300 ease-in-out
                                 ${isDevMode
-                                    ? "bg-blue-600 shadow-[0_0_15px_rgba(37,99,235,0.5)]"
+                                    ? "bg-blue-600" // Removed shadow/glow
                                     : "bg-white/10 hover:bg-white/20"
                                 }
                                 border border-white/10

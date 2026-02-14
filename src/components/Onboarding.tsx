@@ -45,7 +45,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 text-white backdrop-blur-3xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1c1c1c] text-white backdrop-blur-3xl">
             {/* Ambient Blue Glow - More Subtle */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]" />

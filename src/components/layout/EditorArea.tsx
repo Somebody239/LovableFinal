@@ -29,23 +29,23 @@ const EditorArea: React.FC<EditorAreaProps> = ({
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                background: 'transparent', // Show gradient through
+                background: 'transparent',
                 gap: '16px'
             }}>
                 <div style={{
                     width: '80px',
                     height: '80px',
                     borderRadius: '16px',
-                    background: 'hsl(var(--muted))',
+                    background: 'rgba(255, 255, 255, 0.05)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center'
                 }}>
-                    <FileCode size={32} style={{ color: 'hsl(var(--muted-foreground))' }} />
+                    <FileCode size={32} style={{ color: 'rgba(255, 255, 255, 0.4)' }} />
                 </div>
                 <div style={{ textAlign: 'center' }}>
-                    <p style={{ fontSize: '16px', fontWeight: 500, marginBottom: '8px' }}>No file open</p>
-                    <p style={{ fontSize: '13px', color: 'hsl(var(--muted-foreground))' }}>
+                    <p style={{ fontSize: '16px', fontWeight: 500, marginBottom: '8px', color: '#e5e5e5' }}>No file open</p>
+                    <p style={{ fontSize: '13px', color: 'rgba(255, 255, 255, 0.4)' }}>
                         Create or select a file from the sidebar
                     </p>
                 </div>
@@ -79,15 +79,14 @@ const EditorArea: React.FC<EditorAreaProps> = ({
             display: 'flex',
             flexDirection: 'column',
             minHeight: 0,
-            background: 'rgba(20, 20, 20, 0.6)', // Glass-ish
-            backdropFilter: 'blur(10px)'
+            background: 'transparent'
         }}>
             {/* Editor Tabs - Clean look */}
             <div style={{
                 display: 'flex',
                 alignItems: 'center',
                 background: 'rgba(0,0,0,0.2)',
-                borderBottom: '1px solid hsl(var(--border))',
+                borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
                 height: '36px',
                 overflow: 'hidden'
             }}>
@@ -101,19 +100,25 @@ const EditorArea: React.FC<EditorAreaProps> = ({
                                 alignItems: 'center',
                                 gap: '8px',
                                 padding: '0 12px',
-                                height: '36px',
-                                background: activeFile.path === file.path ? 'hsl(var(--background))' : 'transparent',
-                                borderRight: '1px solid hsl(var(--border))',
-                                borderTop: activeFile.path === file.path ? '2px solid hsl(var(--primary))' : '2px solid transparent',
+                                height: '100%',
+                                background: activeFile.path === file.path ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+                                borderRight: '1px solid rgba(255, 255, 255, 0.05)',
+                                color: activeFile.path === file.path ? '#e5e5e5' : '#71717a',
                                 fontSize: '13px',
                                 cursor: 'pointer',
-                                color: activeFile.path === file.path ? 'hsl(var(--foreground))' : 'hsl(var(--muted-foreground))',
-                                whiteSpace: 'nowrap',
-                                transition: 'all 150ms'
+                                minWidth: '120px',
+                                maxWidth: '200px'
                             }}
                         >
                             {getFileIcon(file)}
-                            <span>{file.name}</span>
+                            <span style={{
+                                flex: 1,
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'nowrap'
+                            }}>
+                                {file.name}
+                            </span>
                             <button
                                 onClick={(e) => {
                                     e.stopPropagation();
@@ -122,16 +127,14 @@ const EditorArea: React.FC<EditorAreaProps> = ({
                                 style={{
                                     background: 'transparent',
                                     border: 'none',
-                                    color: 'hsl(var(--muted-foreground))', // Inherit color
-                                    opacity: 0.7,
+                                    color: 'inherit',
                                     cursor: 'pointer',
+                                    opacity: 0.6,
                                     padding: '2px',
-                                    display: 'flex',
-                                    alignItems: 'center',
                                     borderRadius: '4px',
-                                    marginLeft: '4px'
+                                    display: 'flex'
                                 }}
-                                onMouseEnter={(e) => e.currentTarget.style.background = 'hsl(var(--accent))'}
+                                onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'}
                                 onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                             >
                                 <X size={12} />
@@ -141,62 +144,47 @@ const EditorArea: React.FC<EditorAreaProps> = ({
                 </div>
             </div>
 
-            {/* Content Area - Simulating cm-scroller */}
+            {/* Breadcrumbs */}
             <div style={{
-                flex: 1,
+                height: '28px',
                 display: 'flex',
-                overflow: 'auto',
-                position: 'relative',
-                fontSize: '13px',
-                fontFamily: 'var(--font-mono)'
+                alignItems: 'center',
+                padding: '0 16px',
+                gap: '6px',
+                fontSize: '12px',
+                color: '#71717a'
             }}>
-                {/* Gutters (Line Numbers) */}
-                <div style={{
-                    padding: '12px 0',
-                    textAlign: 'right',
-                    color: 'hsl(var(--muted-foreground))',
-                    userSelect: 'none',
-                    minWidth: '48px',
-                    background: 'rgba(0,0,0,0.1)', // Slightly darker gutter
-                    borderRight: '1px solid hsl(var(--border))',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    position: 'sticky',
-                    left: 0,
-                    zIndex: 10
-                }}>
-                    {(lines.length === 0 ? [''] : lines).map((_, i) => (
-                        <div key={i} style={{ paddingRight: '12px', height: '20px', lineHeight: '20px' }}>{i + 1}</div>
-                    ))}
-                </div>
+                <span>project-paramount</span>
+                <ChevronRight size={12} />
+                <span>src</span>
+                <ChevronRight size={12} />
+                <span style={{ color: '#e5e5e5' }}>{activeFile.name}</span>
+            </div>
 
-                {/* Editor Content */}
-                <div style={{ flex: 1, position: 'relative' }}>
-                    <textarea
-                        ref={textareaRef}
-                        defaultValue={activeFile.content}
-                        onChange={handleChange}
-                        spellCheck={false}
-                        placeholder="Start typing..."
-                        style={{
-                            position: 'absolute',
-                            inset: 0,
-                            width: '100%',
-                            height: '100%',
-                            padding: '12px 16px',
-                            background: 'transparent',
-                            border: 'none',
-                            outline: 'none',
-                            resize: 'none',
-                            fontFamily: 'inherit',
-                            fontSize: 'inherit',
-                            color: 'hsl(var(--foreground))',
-                            tabSize: 2,
-                            whiteSpace: 'pre',
-                            lineHeight: '20px'
-                        }}
-                    />
-                </div>
+            {/* Editor Content */}
+            <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
+                <textarea
+                    ref={textareaRef}
+                    onChange={handleChange}
+                    spellCheck={false}
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        background: 'transparent',
+                        color: '#d4d4d4', // Monokai-ish text color
+                        border: 'none',
+                        resize: 'none',
+                        padding: '4px 16px 16px',
+                        outline: 'none',
+                        fontFamily: "'Fira Code', monospace",
+                        fontSize: '14px',
+                        lineHeight: '1.5',
+                        whiteSpace: 'pre'
+                    }}
+                />
             </div>
         </div>
     );

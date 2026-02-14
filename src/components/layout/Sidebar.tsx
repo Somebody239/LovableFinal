@@ -48,16 +48,16 @@ const FileTreeItem = ({ name, type, level, isExpanded, onToggle, children, onCli
                     gap: '6px',
                     padding: `4px 12px 4px ${paddingLeft}`,
                     cursor: 'pointer',
-                    background: isActive ? 'hsl(var(--accent) / 0.1)' : 'transparent',
-                    color: isActive ? 'hsl(var(--foreground))' : 'hsl(var(--muted-foreground))',
+                    background: isActive ? 'rgba(255, 255, 255, 0.05)' : 'transparent',
+                    color: isActive ? '#e5e5e5' : '#a1a1aa',
                     fontSize: '13px',
                     transition: 'all 150ms'
                 }}
                 onMouseEnter={(e) => {
-                    if (!isActive) e.currentTarget.style.color = 'hsl(var(--foreground))';
+                    if (!isActive) e.currentTarget.style.color = '#e5e5e5';
                 }}
                 onMouseLeave={(e) => {
-                    if (!isActive) e.currentTarget.style.color = 'hsl(var(--muted-foreground))';
+                    if (!isActive) e.currentTarget.style.color = '#a1a1aa';
                 }}
             >
                 {type === 'folder' && getIcon()}
@@ -111,17 +111,16 @@ const Sidebar: React.FC<SidebarProps> = ({
         return (
             <div style={{
                 width: '240px',
-                background: '#0a0a0a',
-                borderRight: '1px solid #27272a',
+                background: 'transparent',
                 display: 'flex',
                 flexDirection: 'column'
             }}>
-                <div style={{ padding: '12px', borderBottom: '1px solid #27272a' }}>
-                    <span style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', color: 'hsl(var(--muted-foreground))', letterSpacing: '0.05em' }}>
+                <div style={{ padding: '12px', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                    <span style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', color: '#a1a1aa', letterSpacing: '0.05em' }}>
                         {title}
                     </span>
                 </div>
-                <div style={{ padding: '20px', textAlign: 'center', color: 'hsl(var(--muted-foreground))', fontSize: '12px' }}>
+                <div style={{ padding: '20px', textAlign: 'center', color: '#a1a1aa', fontSize: '12px' }}>
                     {title} View Placeholder
                 </div>
             </div>
@@ -131,21 +130,20 @@ const Sidebar: React.FC<SidebarProps> = ({
     return (
         <div style={{
             width: '240px',
-            background: '#0a0a0a',
-            borderRight: '1px solid #27272a',
+            background: 'transparent', // Transparent to inherit from Layout wrapper
             display: 'flex',
             flexDirection: 'column'
         }}>
             {/* Project Header - Matching Image Style */}
             <div style={{
                 padding: '12px',
-                borderBottom: '1px solid #27272a',
+                borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between'
             }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ff4444' }}></div> {/* Mock "recording" or active dot */}
+                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#fe3b67' }}></div> {/* Red accent from gradient */}
                     <span style={{ fontSize: '13px', fontWeight: 600, color: '#e5e5e5' }}>Project Paramount</span>
                 </div>
                 <ChevronDown size={14} color="#666" />
@@ -155,7 +153,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             <div style={{
                 display: 'flex',
                 padding: '0',
-                borderBottom: '1px solid #27272a'
+                borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
             }}>
                 {[
                     { id: 'files', label: 'Files' },
@@ -173,7 +171,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                             background: 'transparent',
                             border: 'none',
                             color: selectedTab === tab.id ? '#e5e5e5' : '#666',
-                            borderBottom: selectedTab === tab.id ? '2px solid #3b82f6' : '2px solid transparent',
+                            borderBottom: selectedTab === tab.id ? '2px solid #4a6fdb' : '2px solid transparent', // Blue accent
                             cursor: 'pointer',
                             transition: 'color 150ms'
                         }}
@@ -192,9 +190,9 @@ const Sidebar: React.FC<SidebarProps> = ({
                             alignItems: 'center',
                             gap: '8px',
                             padding: '6px 10px',
-                            background: '#18181b', // Darker input bg
+                            background: 'rgba(0, 0, 0, 0.2)', // Darker input bg
                             borderRadius: '6px',
-                            border: '1px solid #27272a'
+                            border: '1px solid rgba(255, 255, 255, 0.05)'
                         }}>
                             <Search size={14} style={{ color: '#666' }} />
                             <input
