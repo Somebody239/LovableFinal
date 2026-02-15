@@ -10,7 +10,7 @@ import Slide04_CoreProblem from './slides/Slide04_CoreProblem';
 import Slide05_Stats from './slides/Slide05_Stats';
 import Slide06_RootCause from './slides/Slide06_RootCause';
 import Slide07_Solution from './slides/Slide07_Solution';
-import Slide08_Features from './slides/Slide08_Features';
+// Slide08_Features merged into Slide07
 import Slide09_Risks from './slides/Slide09_Risks';
 import Slide10_Mitigation from './slides/Slide10_Mitigation';
 import Slide11_CaseStudy from './slides/Slide11_CaseStudy';
@@ -36,15 +36,14 @@ const slides: SlideConfig[] = [
     { id: 5, component: Slide05_Stats },
     { id: 6, component: Slide06_RootCause },
     { id: 7, component: Slide07_Solution },
-    { id: 8, component: Slide08_Features },
-    { id: 9, component: Slide09_Risks },
-    { id: 10, component: Slide10_Mitigation },
-    { id: 11, component: Slide11_CaseStudy },
-    { id: 12, component: Slide12_Market },
-    { id: 13, component: Slide13_Prototype },
-    { id: 14, component: Slide14_Roadmap },
-    { id: 15, component: Slide15_Vision },
-    { id: 16, component: Slide16_ThankYou, hasGradientBg: true },
+    { id: 8, component: Slide09_Risks },
+    { id: 9, component: Slide10_Mitigation },
+    { id: 10, component: Slide11_CaseStudy },
+    { id: 11, component: Slide12_Market },
+    { id: 12, component: Slide13_Prototype },
+    { id: 13, component: Slide14_Roadmap },
+    { id: 14, component: Slide15_Vision },
+    { id: 15, component: Slide16_ThankYou, hasGradientBg: true },
 ];
 
 // --- Main Component ---

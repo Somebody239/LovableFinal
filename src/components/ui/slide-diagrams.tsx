@@ -1,52 +1,56 @@
 import { motion } from "framer-motion";
 import { cn } from "../../utils/index";
-import { ArrowRight, AlertTriangle } from "lucide-react";
+import { ArrowRight, AlertTriangle, Calendar, Rocket, Code, TrendingUp } from "lucide-react";
 
 // --- Slide 4: Pressure Gauge / Heat Map (Refined) ---
 export const PressureGauge = () => {
     return (
         <div className="w-full max-w-4xl mx-auto p-8 flex flex-col items-center">
             {/* Straight Process Line */}
-            <div className="relative w-full h-2 bg-zinc-800 rounded-full mb-12">
+            <div className="relative w-full h-2 bg-zinc-800 rounded-full mb-16 mt-8">
                 <div className="absolute inset-0 bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 opacity-80 rounded-full" />
 
                 {/* Markers */}
-                {['Ideation', 'Prompting', 'Building', 'Friction', 'Limit'].map((step, i) => (
+                {['Ideation', 'Prompting', 'Building', 'Bug/Error', 'Leave'].map((step, i) => (
                     <div key={i} className="absolute top-1/2 -translate-y-1/2 flex flex-col items-center" style={{ left: `${i * 25}%` }}>
-                        <div className="w-4 h-4 rounded-full bg-zinc-900 border-2 border-white z-10" />
-                        <span className="text-xs font-mono uppercase tracking-widest absolute -bottom-8 whitespace-nowrap text-zinc-400">{step}</span>
+                        <div className={`w-4 h-4 rounded-full border-2 z-10 ${i >= 3 ? 'bg-red-500 border-red-200 animate-pulse' : 'bg-zinc-900 border-white'}`} />
+                        <span className={`text-xs font-mono uppercase tracking-widest absolute -bottom-8 whitespace-nowrap ${i >= 3 ? 'text-red-400 font-bold' : 'text-zinc-400'}`}>{step}</span>
+
+                        {/* Arrow pointing at Bug/Error */}
+                        {step === 'Bug/Error' && (
+                            <div className="absolute -top-10 flex flex-col items-center">
+                                <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10 16L0 0H20L10 16Z" fill="#ef4444" />
+                                </svg>
+                            </div>
+                        )}
                     </div>
                 ))}
-            </div>
-
-            {/* The Leak / Export Visual */}
-            <div className="flex items-center gap-4 p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
-                <ArrowRight className="text-red-500 w-6 h-6" />
-                <span className="text-red-400 font-bold text-sm">FORCED EXPORT TO EXTERNAL IDE</span>
             </div>
         </div>
     );
 };
 
 // --- Slide 5: Stats Grid (Compact) ---
+// --- Slide 5: Stats Grid (Compact) ---
 export const StatsGrid = () => {
     return (
-        <div className="grid grid-cols-2 gap-4 w-full h-full max-w-4xl mx-auto">
-            <div className="bg-zinc-900/50 border border-white/10 rounded-xl p-6 flex flex-col justify-center">
-                <h3 className="text-6xl font-bold text-white mb-2">12%</h3>
-                <p className="text-zinc-400 text-sm">Completion Rate</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto">
+            <div className="bg-zinc-900/50 border border-white/10 rounded-xl p-8 flex flex-col items-center justify-center text-center hover:bg-zinc-800/50 transition-colors group">
+                <h3 className="text-7xl font-bold text-[#4A6FDB] mb-2 group-hover:scale-110 transition-transform duration-300">12%</h3>
+                <p className="text-zinc-400 text-lg font-medium">Completion Rate</p>
             </div>
-            <div className="bg-zinc-900/50 border border-white/10 rounded-xl p-6 flex flex-col justify-center">
-                <h3 className="text-6xl font-bold text-white mb-2">80%</h3>
-                <p className="text-zinc-400 text-sm">Credit Waste on Debugging</p>
+            <div className="bg-zinc-900/50 border border-white/10 rounded-xl p-8 flex flex-col items-center justify-center text-center hover:bg-zinc-800/50 transition-colors group">
+                <h3 className="text-7xl font-bold text-[#FE4993] mb-2 group-hover:scale-110 transition-transform duration-300">80%</h3>
+                <p className="text-zinc-400 text-lg font-medium">Credit Waste on Debugging</p>
             </div>
-            <div className="bg-zinc-900/50 border border-white/10 rounded-xl p-6 flex flex-col justify-center">
-                <h3 className="text-6xl font-bold text-white mb-2">65%</h3>
-                <p className="text-zinc-400 text-sm">Auto-generated Code</p>
+            <div className="bg-zinc-900/50 border border-white/10 rounded-xl p-8 flex flex-col items-center justify-center text-center hover:bg-zinc-800/50 transition-colors group">
+                <h3 className="text-7xl font-bold text-[#DE82E3] mb-2 group-hover:scale-110 transition-transform duration-300">65%</h3>
+                <p className="text-zinc-400 text-lg font-medium">Auto-generated Code</p>
             </div>
-            <div className="bg-zinc-900/50 border border-white/10 rounded-xl p-6 flex flex-col justify-center">
-                <h3 className="text-6xl font-bold text-white mb-2">$500</h3>
-                <p className="text-zinc-400 text-sm">Monthly Burn / Active Project</p>
+            <div className="bg-zinc-900/50 border border-white/10 rounded-xl p-8 flex flex-col items-center justify-center text-center hover:bg-zinc-800/50 transition-colors group">
+                <h3 className="text-7xl font-bold text-[#FE6323] mb-2 group-hover:scale-110 transition-transform duration-300">$500</h3>
+                <p className="text-zinc-400 text-lg font-medium">Monthly Burn / Active Project</p>
             </div>
         </div>
     )
@@ -56,38 +60,45 @@ export const StatsGrid = () => {
 // --- Slide 6: Spectrum Slider (Refined) ---
 export const SpectrumSlider = () => {
     return (
-        <div className="w-full max-w-4xl mx-auto py-12 relative">
-            {/* The Bar */}
-            <div className="w-full h-6 bg-zinc-800 rounded-full relative overflow-hidden flex">
-                <div className="w-1/3 h-full bg-blue-500/30 flex items-center justify-center text-[10px] font-bold text-blue-300 tracking-widest border-r border-white/10">NO-CODE</div>
-                <div className="w-1/3 h-full bg-red-500/20 flex items-center justify-center text-[10px] font-bold text-red-400 tracking-widest border-r border-white/10 relative">
-                    <div className="absolute inset-0 border-y border-red-500/50 animate-pulse" />
-                    THE GAP
+        <div className="w-full max-w-4xl mx-auto py-8 relative flex flex-col items-center">
+            {/* Labels Top */}
+            <div className="flex justify-between w-full px-4 mb-2">
+                <div className="flex flex-col items-center">
+                    <span className="text-[#4A6FDB] font-bold text-lg">Lovable Today</span>
+                    <span className="text-zinc-500 text-sm">Ideation & Prototypes</span>
                 </div>
-                <div className="w-1/3 h-full bg-purple-500/30 flex items-center justify-center text-[10px] font-bold text-purple-300 tracking-widest">FULL-CODE</div>
+                <div className="flex flex-col items-center">
+                    <span className="text-[#7F7BEF] font-bold text-lg">External IDEs</span>
+                    <span className="text-zinc-500 text-sm">Cursor / VS Code</span>
+                </div>
             </div>
 
-            {/* Labels */}
-            <div className="flex justify-between mt-6 text-center">
-                <div className="w-1/3">
-                    <span className="text-blue-400 font-bold text-sm block">Lovable Today</span>
-                    <span className="text-zinc-500 text-xs">Ideation & Prototypes</span>
+            {/* The Bar */}
+            <div className="w-full h-8 bg-zinc-800 rounded-full relative overflow-visible flex shadow-inner">
+                <div className="w-1/2 h-full bg-[#4A6FDB]/20 flex items-center justify-center text-[10px] font-bold text-[#4A6FDB] tracking-widest border-r border-white/5 rounded-l-full">NO-CODE</div>
+                <div className="w-1/2 h-full bg-[#7F7BEF]/20 flex items-center justify-center text-[10px] font-bold text-[#7F7BEF] tracking-widest rounded-r-full">FULL-CODE</div>
+
+                {/* The Gap Overlay */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-full bg-red-500/10 flex items-center justify-center border-x border-red-500/30">
+                    <span className="text-[10px] font-bold text-red-400 tracking-widest animate-pulse">THE GAP</span>
                 </div>
 
-                <div className="w-1/3 relative">
-                    <div className="absolute -top-16 left-1/2 -translate-x-1/2 bg-zinc-900 px-4 py-2 border border-red-500/30 rounded-lg shadow-xl">
-                        <span className="text-red-400 font-bold text-xs whitespace-nowrap">USER DROPOFF ZONE</span>
+                {/* DROPOFF ZONE - centered on bar, pointing right toward IDE */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-3 z-20">
+                    <div className="bg-zinc-900 px-5 py-2 border border-red-500/30 rounded-lg shadow-xl relative overflow-hidden group">
+                        <div className="absolute inset-0 bg-red-500/5 group-hover:bg-red-500/10 transition-colors" />
+                        <span className="text-red-400 font-bold text-sm whitespace-nowrap relative z-10">USER DROPOFF ZONE</span>
                     </div>
-                    <ArrowRight className="w-6 h-6 text-red-500 mx-auto rotate-90 mt-[-10px]" />
+                    <ArrowRight className="w-6 h-6 text-red-500 animate-pulse" />
                 </div>
+            </div>
 
-                <div className="w-1/3">
-                    <span className="text-purple-400 font-bold text-sm block">External IDEs</span>
-                    <span className="text-zinc-500 text-xs">Cursor / VS Code</span>
-                </div>
+            {/* Vertical line going DOWN from center of bar to the text box */}
+            <div className="flex flex-col items-center mt-0">
+                <div className="w-px h-12 bg-red-500/50" />
             </div>
         </div>
-    )
+    );
 }
 
 // --- Slide 7: Interactive Toggle (Single Switch) ---
@@ -147,21 +158,32 @@ export const RiskList = () => {
 
 // --- Slide 11: Case Study Timeline (Refined) ---
 export const CaseStudyTimeline = () => {
+    const items = [
+        { year: '2021', title: 'Experiment', sub: 'GitHub Copilot Launch', icon: Calendar, color: "text-[#4A6FDB]", bg: "bg-[#4A6FDB]" },
+        { year: '2023', title: 'Expansion', sub: 'Chat & Enterprise Features', icon: Code, color: "text-[#DE82E3]", bg: "bg-[#DE82E3]" },
+        { year: '2024', title: 'Integration', sub: 'Deep VS Code Integration', icon: Rocket, color: "text-[#FE4993]", bg: "bg-[#FE4993]" },
+        { year: 'Today', title: 'Dominance', sub: '50M+ MAU / +58% Efficiency', icon: TrendingUp, color: "text-[#FE6323]", bg: "bg-[#FE6323]" },
+    ];
+
     return (
-        <div className="relative w-full max-w-4xl mx-auto py-8">
-            <div className="border-t border-zinc-800 w-full absolute top-[60px]" />
-            <div className="grid grid-cols-4 gap-4">
-                {[
-                    { year: '2021', title: 'Experiment', sub: 'GitHub Copilot Launch (Preview)' },
-                    { year: '2023', title: 'Expansion', sub: 'Chat & Enterprise Features' },
-                    { year: '2024', title: 'Integration', sub: 'Deep VS Code Integration' },
-                    { year: 'Result', title: 'Dominance', sub: '50M+ MAU / +58% Efficiency' },
-                ].map((item, i) => (
-                    <div key={i} className="flex flex-col items-center relative text-center">
-                        <span className="text-zinc-600 text-xs font-mono mb-6 bg-black px-2 z-10">{item.year}</span>
-                        <div className="w-3 h-3 rounded-full bg-blue-500 border-4 border-black z-10 mb-4" />
-                        <h4 className="font-bold text-white text-sm mb-1">{item.title}</h4>
-                        <p className="text-xs text-zinc-500 px-4">{item.sub}</p>
+        <div className="relative w-full max-w-5xl mx-auto py-12">
+            {/* Connecting Line — icons sit ABOVE this, line is below */}
+            <div className="absolute top-[60px] left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-[#4A6FDB] via-[#DE82E3] to-[#FE6323] opacity-40" />
+
+            <div className="grid grid-cols-4 gap-8">
+                {items.map((item, i) => (
+                    <div key={i} className="flex flex-col items-center relative text-center group">
+                        {/* Icon ON the line */}
+                        <div className={`w-12 h-12 rounded-full ${item.bg}/10 border-2 border-white/10 flex items-center justify-center z-10 bg-[#1c1c1c] group-hover:scale-110 transition-transform duration-300`}>
+                            <item.icon className={`w-5 h-5 ${item.color}`} />
+                        </div>
+
+                        {/* Year */}
+                        <span className={`text-lg font-bold ${item.color} mt-4 mb-1`}>{item.year}</span>
+
+                        {/* Title */}
+                        <h4 className="font-bold text-white text-lg mb-1">{item.title}</h4>
+                        <p className="text-sm text-zinc-500">{item.sub}</p>
                     </div>
                 ))}
             </div>

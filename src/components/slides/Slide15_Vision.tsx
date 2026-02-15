@@ -1,17 +1,36 @@
+import { motion } from "framer-motion";
+
 export default function Slide15_Vision() {
     return (
-        <div className="flex flex-col h-full w-full max-w-[1400px] px-12 md:px-24 z-10 relative items-center justify-center">
-            <div className="max-w-4xl text-center space-y-12">
-                <h2 className="text-4xl text-white font-light leading-snug">
-                    Lovable has a rare opportunity to evolve from an <span className="text-blue-400">idea generator</span> into a <span className="text-purple-400">complete development ecosystem</span>.
-                </h2>
-                <p className="text-zinc-400 text-xl leading-relaxed">
-                    By supporting users from initial concept through full production deployment, Lovable can increase retention, attract new technical audiences, expand revenue streams, and strengthen its competitive position.
-                </p>
-                <div className="h-px w-32 bg-white/10 mx-auto my-8" />
-                <p className="text-3xl font-bold text-white italic">
-                    "Lovable doesn't just help users start building software—it helps them finish it."
-                </p>
+        <div className="flex flex-col items-center justify-center h-full w-full bg-[#1c1c1c] text-white relative overflow-hidden p-8">
+            <div className="max-w-5xl w-full z-10 flex flex-col items-center text-center">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.8 }}
+                    className="relative"
+                >
+                    <div className="absolute -top-12 -left-12 text-blue-500/20 font-serif text-[120px] leading-none select-none">"</div>
+
+                    <h2 className="text-4xl md:text-6xl font-medium leading-tight mb-12 relative z-10">
+                        Lovable can't just help users <span className="text-blue-400">start</span> building software; <br />
+                        it needs to help them <span className="text-purple-400">finish</span> it.
+                    </h2>
+
+                    <div className="absolute -bottom-12 -right-12 text-purple-500/20 font-serif text-[120px] leading-none select-none rotate-180">"</div>
+                </motion.div>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="max-w-3xl"
+                >
+                    <div className="h-px w-32 bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mb-8" />
+                    <p className="text-zinc-400 text-xl font-light leading-relaxed">
+                        By closing the gap between prototype and production, we unlock the full potential of AI-assisted development.
+                    </p>
+                </motion.div>
             </div>
         </div>
     );
